@@ -1,0 +1,20 @@
+name = pareshbhai
+phone = 1234567890
+
+
+credit => 5000 + 5000
+
+
+debit => 5673.00 + 5584.00
+
+
+pending amount = 673.00 +584.00
+
+
+date of recived credit  18-01-2025 , 19-01-2025    
+
+
+
+
+
+
