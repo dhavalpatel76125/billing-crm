@@ -101,7 +101,7 @@
                 <div class="flex justify-between items-center font-medium text-lg">
                     <span>Total of Product & Freight:</span>
                     <span id="total-of-product-and-freight">₹{{ number_format($invoice->subtotal + $invoice->freight, 2) }}</span>
-                    <input type="hidden" id="total-of-product-and-freight-for-hidden" name="total-of-product-and-freight-for-hidden" value="{{ $invoice->subtotal + $invoice->freight }}">
+                    <input type="hidden" id="total-of-product-and-freight-for-hidden" name="total-of-product-and-freight-for-hidden" step="0.01" value="{{ $invoice->subtotal + $invoice->freight }}">
                 </div>
                 <div class="flex justify-between items-center mb-4">
                     <label for="credit" class="text-gray-800 font-medium">Credit (Received):</label>
@@ -174,11 +174,11 @@ function addNewLine() {
             <input type="number" name="quantity[]" value="" class="w-full px-4 py-3 border border-gray-400 rounded-lg focus:ring-blue-500 focus:border-blue-500" onchange="updateTotals()">
         </td>
         <td class="px-6 py-3 border w-1/6">
-            <input type="number" name="unit_price[]" value="" class="w-full px-4 py-3 border border-gray-400 rounded-lg focus:ring-blue-500 focus:border-blue-500" onchange="updateTotals()">
+            <input type="number" name="unit_price[]" value="" class="w-full px-4 py-3 border border-gray-400 rounded-lg focus:ring-blue-500 focus:border-blue-500" step="0.01" onchange="updateTotals()">
         </td>
         <td class="px-6 py-3 border w-1/6 text-right">
             <span class="item-total">₹0.00</span>
-            <input type="hidden" name="total[]" value="0">
+            <input type="hidden" name="total[]" value="0" step="0.01">
         </td>
         <td class="px-6 py-3 border w-1/12 text-center">
             <button type="button" onclick="removeLine(this)" class="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600">Remove</button>
