@@ -19,7 +19,8 @@
                          <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Total of products + freight</th> 
                          {{-- <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Freight</th>  --}}
                          <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Credit</th> 
-                         <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Debit</th> 
+                         <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Debit</th>
+                         <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Total</th> 
                         <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Action</th>
                     </tr>
                 </thead>
@@ -36,6 +37,7 @@
                             <td class="text-left py-3 px-4">{{ number_format($invoice->subtotal + $invoice->freight, 2, '.', '') }}</td>
                             {{-- <td class="text-left py-3 px-4">{{ $invoice->freight }}</td> --}}
                             <td class="text-left py-3 px-4">{{ $invoice->credit }}</td>
+                            <td class="text-left py-3 px-4">{{ $invoice->total - $invoice->credit }}</td>
                             <td class="text-left py-3 px-4">{{ $invoice->total }}</td> 
                             <td class="text-left py-3 px-4">
                                 <div class="flex space-x-4">
