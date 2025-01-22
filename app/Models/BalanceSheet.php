@@ -14,6 +14,13 @@ class BalanceSheet extends Model
         'total_credit',
         'total_debit',
         'balance',
+        'remarks',
+        'last_credit_amount',
+        'last_credit_updated_at'
+    ];
+
+    protected $casts = [
+        'last_credit_updated_at' => 'datetime'
     ];
 
     public function customer()

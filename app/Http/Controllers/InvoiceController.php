@@ -145,30 +145,26 @@ class InvoiceController extends Controller
             'freight' => 'nullable|numeric',
         ]);
 
-        // Find the invoice by ID
+        // Fetch the existing invoice
         $invoice = Invoice::findOrFail($id);
 
-        // Use the total from the request instead of calculating it
-        $subtotal = $request->input('product-total-for-hidden');
-        $freight = $request->input('freight') ?? 0;
-        $credit = $request->input('credit') ?? 0;
-        $total = $request->input('grand-total-for-hidden');
+        // Calculate the old total debit
+        $oldTotalDebit = $invoice->subtotal + $invoice->freight;
 
-        // Update the invoice
+        // Adjust the balance sheet by removing the old invoice values
+        $this->adjustBalanceSheet($invoice->customer_id, -$oldTotalDebit, -$invoice->credit);
+
+        // Update the invoice with new values
         $invoice->update([
             'customer_id' => $request->customer,
             'date' => $request->date,
-            'subtotal' => $subtotal,
+            'subtotal' => $request->input('product-total-for-hidden'),
             'reference' => $request->reference,
             'vehicle_number' => $request->vehicle_number,
-            'freight' => $freight,
-            'credit' => $credit,
-            'total' => $total,
+            'freight' => $request->input('freight') ?? 0,
+            'credit' => $request->input('credit') ?? 0,
+            'total' => $request->input('grand-total-for-hidden'),
         ]);
-
-        // Collect existing invoice item IDs
-        $existingItemIds = $invoice->invoiceItems()->pluck('id')->toArray();
-        $updatedItemIds = [];
 
         // Update or create invoice items
         foreach ($request->product_id as $index => $product_id) {
@@ -181,28 +177,32 @@ class InvoiceController extends Controller
                 'total' => $request->unit_price[$index] * $request->quantity[$index],
             ];
 
-            if ($itemId && in_array($itemId, $existingItemIds)) {
+            if ($itemId) {
                 // Update existing item
                 InvoiceItem::where('id', $itemId)->update($itemData);
-                $updatedItemIds[] = $itemId;
             } else {
                 // Create new item
-                $newItem = InvoiceItem::create(array_merge($itemData, ['invoice_id' => $invoice->id]));
-                $updatedItemIds[] = $newItem->id;
+                InvoiceItem::create(array_merge($itemData, ['invoice_id' => $invoice->id]));
             }
         }
 
-        // Delete removed invoice items
-        $itemsToDelete = array_diff($existingItemIds, $updatedItemIds);
-        if (!empty($itemsToDelete)) {
-            InvoiceItem::whereIn('id', $itemsToDelete)->delete();
-        }
+        // Calculate the new total debit
+        $newTotalDebit = $request->input('product-total-for-hidden') + ($request->input('freight') ?? 0);
 
-        // Update balance sheet
-        $this->updateBalanceSheet($request->customer, $request->input('grand-total-for-hidden'), $request->input('credit'));
+        // Recalculate the balance sheet with new invoice values
+        $this->adjustBalanceSheet($request->customer, $newTotalDebit, $request->input('credit'));
 
         // Return a success response or redirect
         return redirect()->route('invoices.index')->with('success', 'Invoice updated successfully');
+    }
+
+    private function adjustBalanceSheet($customerId, $totalDebitChange, $creditChange)
+    {
+        $balanceSheet = BalanceSheet::firstOrNew(['customer_id' => $customerId]);
+        $balanceSheet->total_credit += $creditChange;
+        $balanceSheet->total_debit += $totalDebitChange;
+        $balanceSheet->balance = $balanceSheet->total_debit - $balanceSheet->total_credit;
+        $balanceSheet->save();
     }
 
     //show method
@@ -227,7 +227,9 @@ class InvoiceController extends Controller
     public function delete($id)
     {
         $invoice = Invoice::findOrFail($id);
+
         $invoice->delete();
+
         return redirect()->route('invoices.index')->with('success', 'Invoice deleted successfully');
     }
 
@@ -236,7 +238,7 @@ class InvoiceController extends Controller
         $balanceSheet = BalanceSheet::firstOrNew(['customer_id' => $customerId]);
         $balanceSheet->total_credit += $credit;
         $balanceSheet->total_debit += $totalDebit;
-        $balanceSheet->balance = $balanceSheet->total_debit - $balanceSheet->total_credit;
+        $balanceSheet->balance = $balanceSheet->total_credit - $balanceSheet->total_debit;
         $balanceSheet->save();
     }
 }

@@ -105,7 +105,7 @@
                 </div>
                 <div class="flex justify-between items-center mb-4">
                     <label for="credit" class="text-gray-800 font-medium">Credit (Received):</label>
-                    <input type="number" id="credit" name="credit" value="{{ $invoice->credit }}" class="w-32 px-4 py-3 border border-gray-400 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-red-700" onchange="updateTotals()">
+                    <input type="number" id="credit" name="credit" value="{{ $invoice->credit }}" class="w-32 px-4 py-3 border border-gray-400 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-red-700" step="0.01" onchange="updateTotals()">
                 </div>
                 <div class="flex justify-between items-center font-medium text-lg">
                     <span>Grand Total (After Credit):</span>

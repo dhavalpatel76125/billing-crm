@@ -97,14 +97,14 @@
                         <label for="credit" class="text-gray-800 font-medium">Credit (Received):</label>
                         <input type="number" id="credit" name="credit"
                             class="w-32 px-4 py-3 border border-gray-400 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-red-700"
-                            placeholder="Credit" min="0" onchange="updateTotals()">
+                            placeholder="Credit" step="0.01" onchange="updateTotals()">
                     </div>
                     <div class="flex justify-between items-center font-medium text-lg">
                         <span>Grand Total (After Credit):</span>
                         <span id="grand-total">₹0.00</span>
                         <input type="number" id="grand-total-for-hidden" name="grand-total-for-hidden"
                             class="w-32 px-4 py-3 border border-gray-400 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-blue-600"
-                            placeholder="Grand Total" min="0" step="0.01" hidden>
+                            placeholder="Grand Total"  step="0.01" hidden>
                     </div>
                 </div>
 

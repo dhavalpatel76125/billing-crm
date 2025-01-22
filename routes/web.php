@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\BalanceSheetController;
 
 // Public routes (without middleware)
 Route::get('/', [LoginController::class, 'showLoginForm'])->name('login');
@@ -52,4 +53,8 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/delete/{id}', 'App\Http\Controllers\ProductController@delete')->name('delete');
         Route::get('/show/{id}', 'App\Http\Controllers\ProductController@show')->name('show');
     });
+
+    // Balance sheet routes
+    Route::put('/balance-sheet/{id}/update-credit', [BalanceSheetController::class, 'updateCredit'])
+        ->name('balance-sheet.update-credit');
 });
