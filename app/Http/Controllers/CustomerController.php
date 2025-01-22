@@ -94,8 +94,8 @@ class CustomerController extends Controller
 
     public function showBalanceSheet()
     {
-        // Fetch all balance sheets with related customer data
-        $balanceSheets = BalanceSheet::with('customer')->get();
+        // Fetch all balance sheets with related customer data plus and minus allowed but 0 not allowed 
+        $balanceSheets = BalanceSheet::with('customer')->where('balance', '!=', 0)->get();
 
         // Pass the data to the view
         return view('customers.balance_sheet', compact('balanceSheets'));
