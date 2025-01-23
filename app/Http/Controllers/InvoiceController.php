@@ -85,6 +85,8 @@ class InvoiceController extends Controller
             'freight' => $freight,
             'credit' => $credit,
             'total' => $totalDebit,
+            'reference' => $request->reference,
+            'vehicle_number' => $request->vehicle_number,
         ]);
 
         // Insert the invoice items
