@@ -46,7 +46,7 @@
                     <thead class="bg-gray-50">
                         <tr>
                             <th class="px-6 py-3 border">Product</th>
-                            <th class="px-6 py-3 border">Description</th>
+                            {{-- <th class="px-6 py-3 border">Description</th> --}}
                             <th class="px-6 py-3 border">Quantity</th>
                             <th class="px-6 py-3 border">Unit Price</th>
                             <th class="px-6 py-3 border">Total</th>
@@ -64,7 +64,7 @@
                                     @endforeach
                                 </select>
                             </td>
-                            <td class="px-6 py-3 border w-1/5">
+                            <td class="px-6 py-3 border w-1/5" hidden>
                                 <textarea name="description[]" class="w-full px-4 py-3 border border-gray-400 rounded-lg focus:ring-blue-500 focus:border-blue-500">{{ $item->description }}</textarea>
                             </td>
                             <td class="px-6 py-3 border w-1/6">
@@ -167,7 +167,7 @@ function addNewLine() {
                 @endforeach
             </select>
         </td>
-        <td class="px-6 py-3 border w-1/5">
+        <td class="px-6 py-3 border w-1/5" hidden>
             <textarea name="description[]" class="w-full px-4 py-3 border border-gray-400 rounded-lg focus:ring-blue-500 focus:border-blue-500"></textarea>
         </td>
         <td class="px-6 py-3 border w-1/6">

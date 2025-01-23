@@ -53,7 +53,7 @@
                         <thead class="bg-gray-100">
                             <tr>
                                 <th class="px-6 py-3 border">Item</th>
-                                <th class="px-6 py-3 border">Description</th>
+                                {{-- <th class="px-6 py-3 border">Description</th> --}}
                                 <th class="px-6 py-3 border">Qty</th>
                                 <th class="px-6 py-3 border">Unit Price</th>
                                 <th class="px-6 py-3 border text-right">Total</th>
@@ -136,7 +136,7 @@
                 @endforeach
             </select>
         </td>
-        <td class="px-6 py-3 border w-1/5">
+        <td class="px-6 py-3 border w-1/5" hidden>
             <textarea name="description[]" class="w-full px-4 py-3 border border-gray-400 rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="Description"></textarea>
         </td>
         <td class="px-6 py-3 border w-1/6">
