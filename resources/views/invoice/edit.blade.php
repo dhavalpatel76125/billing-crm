@@ -28,7 +28,7 @@
                 </div>
                 <div>
                     <label for="date" class="block text-gray-800 font-semibold mb-2">Date</label>
-                    <input type="date" id="date" name="date" value="{{ $invoice->date }}" class="w-full border border-gray-400 rounded-lg px-4 py-3 focus:ring-blue-500 focus:border-blue-500" required>
+                    <input type="date" id="date" name="date" value="{{ $invoice->date }}" class="w-full border border-gray-400 rounded-lg px-4 py-3 focus:ring-blue-500 focus:border-blue-500" required disabled>
                 </div>
                 <div>
                     <label for="reference" class="block text-gray-800 font-semibold mb-2">Reference (Optional)</label>
