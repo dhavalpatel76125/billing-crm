@@ -74,7 +74,7 @@
                 <p><strong>Freight:</strong> ₹{{ number_format($invoice->freight, 2) }}</p>
                 {{-- <p><strong>Total of product and freight:</strong> ₹{{ number_format($invoice->subtotal + $invoice->freight, 2) }}</p>
                 <p><strong>Credited amount:</strong> ₹{{ number_format($invoice->credit, 2) }}</p> --}}
-                <p><strong>Total amount:</strong> ₹{{ number_format($invoice->subtotal + $invoice->freight - $invoice->credit, 2) }}</p>
+                <p><strong>Total amount:</strong> ₹{{ number_format($invoice->grand_total, 2) }}</p>
             </div>
 
             <div class="text-center">

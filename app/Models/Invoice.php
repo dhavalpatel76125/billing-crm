@@ -17,6 +17,7 @@ class Invoice extends Model
         'credit',
         'reference',
         'vehicle_number',
+        'grand_total',
     ];
     public function customer()
     {

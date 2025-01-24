@@ -24,7 +24,7 @@ class InvoiceController extends Controller
                 $query->select('id', 'name', 'phone');
             }
         ])
-            ->select('id', 'customer_id', 'invoice_number', 'date', 'subtotal', 'freight', 'credit', 'total', 'reference', 'vehicle_number')
+            ->select('id', 'customer_id', 'invoice_number', 'date', 'subtotal', 'freight', 'credit', 'total', 'reference', 'vehicle_number', 'grand_total')
             ->get();
         // dd($invoices);
         return view('invoice.index', compact('invoices'));
@@ -86,6 +86,7 @@ class InvoiceController extends Controller
             'freight' => $freight,
             'credit' => $credit,
             'total' => $totalDebit,
+            'grand_total' => $request->input('grand-total-for-hidden'),
             'reference' => $request->reference,
             'vehicle_number' => $request->vehicle_number,
         ]);
@@ -166,7 +167,8 @@ class InvoiceController extends Controller
             'vehicle_number' => $request->vehicle_number,
             'freight' => $request->input('freight') ?? 0,
             'credit' => $request->input('credit') ?? 0,
-            'total' => $request->input('grand-total-for-hidden'),
+            'total' => $request->input('total-of-product-and-freight-for-hidden'),
+            'grand_total' => $request->input('grand-total-for-hidden'),
         ]);
 
         // Update or create invoice items
@@ -220,7 +222,7 @@ class InvoiceController extends Controller
             }
         ])
             ->where('id', $id)
-            ->select('id', 'customer_id', 'invoice_number', 'date', 'subtotal', 'freight', 'credit', 'total', 'reference', 'vehicle_number')
+            ->select('id', 'customer_id', 'invoice_number', 'date', 'subtotal', 'freight', 'credit', 'total', 'reference', 'vehicle_number', 'grand_total')
             ->firstOrFail();
         
         return view('invoice.show', compact('invoice'));

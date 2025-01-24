@@ -182,7 +182,7 @@
 
         // Calculate totals
         const totalOfProductAndFreight = productTotal + freight;
-        const grandTotal = totalOfProductAndFreight - credit;
+        const grandTotal = Math.round(totalOfProductAndFreight - credit);
 
         // Update product total
         document.getElementById('product-total').textContent = `₹${productTotal.toFixed(2)}`;

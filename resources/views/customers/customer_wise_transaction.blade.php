@@ -45,8 +45,7 @@
                                 <td class="px-6 py-4 border-b border-gray-300 text-right">
                                     ₹{{ number_format($transaction->credit, 2) }}</td>
                                 <td class="px-6 py-4 border-b border-gray-300 text-right">
-                                    {{ number_format($transaction->subtotal + $transaction->freight - $transaction->credit, 2, '.', '') }}
-                                </td>
+                                    ₹{{ number_format($transaction->grand_total, 2) }}</td>
                                 <td class="px-6 py-4 border-b border-gray-300 text-center">
                                     <a href="{{ route('invoices.show', $transaction->id) }}"
                                         class="text-blue-500 hover:text-blue-700 mr-3">

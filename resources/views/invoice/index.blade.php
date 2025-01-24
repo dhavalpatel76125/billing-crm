@@ -37,7 +37,7 @@
                             <td class="text-left py-3 px-4">{{ number_format($invoice->subtotal + $invoice->freight, 2, '.', '') }}</td>
                             {{-- <td class="text-left py-3 px-4">{{ $invoice->freight }}</td> --}}
                             <td class="text-left py-3 px-4">{{ $invoice->credit }}</td>
-                            <td class="text-left py-3 px-4">{{ number_format($invoice->subtotal + $invoice->freight - $invoice->credit, 2, '.', '') }}</td>
+                            <td class="text-left py-3 px-4">{{ $invoice->grand_total }}</td>
                             {{-- <td class="text-left py-3 px-4">{{ $invoice->total }}</td>  --}}
                             <td class="text-left py-3 px-4">
                                 <div class="flex space-x-4">

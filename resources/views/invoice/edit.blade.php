@@ -137,7 +137,7 @@ function updateTotals() {
     const freight = Math.max(0, parseFloat(document.getElementById('freight').value) || 0);
     const credit = Math.max(0, parseFloat(document.getElementById('credit').value) || 0);
     const totalOfProductAndFreight = subTotal + freight;
-    const grandTotal = totalOfProductAndFreight - credit;
+    const grandTotal = Math.round(totalOfProductAndFreight - credit);
 
     document.getElementById('sub-total').textContent = `₹${subTotal.toFixed(2)}`;
     document.getElementById('product-total-for-hidden').value = subTotal;

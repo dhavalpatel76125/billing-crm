@@ -80,7 +80,7 @@ class CustomerController extends Controller
     {
         $customer = Customer::findOrFail($id);
         $transactions = Invoice::where('customer_id', $id)
-            ->select('id', 'invoice_number', 'date', 'subtotal', 'freight', 'credit', 'total')
+            ->select('id', 'invoice_number', 'date', 'subtotal', 'freight', 'credit', 'total', 'grand_total')
             ->orderBy('date', 'desc')
             ->get();
 
