@@ -27,10 +27,10 @@
                 @csrf
 
                 <div class="mb-4">
-                    <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                    <input type="email" name="email" id="email" class="w-full p-3 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 
-                    @error('email') border-red-500 @enderror" value="{{ old('email') }}" required autofocus>
-                    @error('email')
+                    <label for="name" class="block text-sm font-medium text-gray-700">Username</label>
+                    <input type="text" name="name" id="name" class="w-full p-3 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 
+                    @error('name') border-red-500 @enderror" value="{{ old('name') }}" required autofocus>
+                    @error('name')
                         <span class="text-sm text-red-500">{{ $message }}</span>
                     @enderror
                 </div>

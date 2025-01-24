@@ -17,12 +17,12 @@ class LoginController extends Controller
     {
         // Validate the input fields
         $request->validate([
-            'email' => 'required|email',
+            'name' => 'required|string',
             'password' => 'required|min:3',
         ]);
 
         // Attempt to authenticate the user with the provided credentials
-        $credentials = $request->only('email', 'password');
+        $credentials = $request->only('name', 'password');
         if (Auth::attempt($credentials)) {
             // Regenerate the session to prevent fixation attacks
             $request->session()->regenerate();
@@ -33,7 +33,7 @@ class LoginController extends Controller
 
         // If authentication fails, redirect back with an error message
         return redirect()->back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
+            'name' => 'The provided credentials do not match our records.',
         ])->withInput($request->except('password')); // Preserve input except the password
     }
 }
