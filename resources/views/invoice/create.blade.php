@@ -32,7 +32,7 @@
                         <label for="date" class="block text-gray-800 font-semibold mb-2">Date</label>
                         <input type="date" id="date" name="date"
                             class="w-full border border-gray-400 rounded-lg px-4 py-3 focus:ring-blue-500 focus:border-blue-500"
-                            value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" required disabled>
+                            value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" required >
                     </div>
                     <div>
                         <label for="reference" class="block text-gray-800 font-semibold mb-2">Reference (Optional)</label>
@@ -140,7 +140,7 @@
             <textarea name="description[]" class="w-full px-4 py-3 border border-gray-400 rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="Description"></textarea>
         </td>
         <td class="px-6 py-3 border w-1/6">
-            <input type="number" name="quantity[]" class="w-full px-4 py-3 border border-gray-400 rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="0" onchange="updateTotals()">
+            <input type="number" name="quantity[]" class="w-full px-4 py-3 border border-gray-400 rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="0" step="0.01" onchange="updateTotals()">
         </td>
 <td class="px-6 py-3 border w-1/6">
     <input type="number" name="unit_price[]" class="w-full px-4 py-3 border border-gray-400 rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="0" step="0.01" onchange="updateTotals()">

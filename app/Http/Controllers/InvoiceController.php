@@ -45,6 +45,7 @@ class InvoiceController extends Controller
     //store
     public function store(Request $request)
     {
+        dd($request->all());
         // Validate the request data
         $request->validate([
             'customer' => 'required|exists:customers,id',

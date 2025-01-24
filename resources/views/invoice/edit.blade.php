@@ -68,7 +68,7 @@
                                 <textarea name="description[]" class="w-full px-4 py-3 border border-gray-400 rounded-lg focus:ring-blue-500 focus:border-blue-500">{{ $item->description }}</textarea>
                             </td>
                             <td class="px-6 py-3 border w-1/6">
-                                <input type="number" name="quantity[]" value="{{ $item->quantity }}" class="w-full px-4 py-3 border border-gray-400 rounded-lg focus:ring-blue-500 focus:border-blue-500" onchange="updateTotals()">
+                                <input type="number" name="quantity[]" value="{{ $item->quantity }}" class="w-full px-4 py-3 border border-gray-400 rounded-lg focus:ring-blue-500 focus:border-blue-500" step="0.01" onchange="updateTotals()">
                             </td>
                             <td class="px-6 py-3 border w-1/6">
                                 <input type="number" name="unit_price[]" value="{{ $item->unit_price }}" class="w-full px-4 py-3 border border-gray-400 rounded-lg focus:ring-blue-500 focus:border-blue-500" onchange="updateTotals()">
@@ -171,7 +171,7 @@ function addNewLine() {
             <textarea name="description[]" class="w-full px-4 py-3 border border-gray-400 rounded-lg focus:ring-blue-500 focus:border-blue-500"></textarea>
         </td>
         <td class="px-6 py-3 border w-1/6">
-            <input type="number" name="quantity[]" value="" class="w-full px-4 py-3 border border-gray-400 rounded-lg focus:ring-blue-500 focus:border-blue-500" onchange="updateTotals()">
+            <input type="number" name="quantity[]" value="" class="w-full px-4 py-3 border border-gray-400 rounded-lg focus:ring-blue-500 focus:border-blue-500" step="0.01" onchange="updateTotals()">
         </td>
         <td class="px-6 py-3 border w-1/6">
             <input type="number" name="unit_price[]" value="" class="w-full px-4 py-3 border border-gray-400 rounded-lg focus:ring-blue-500 focus:border-blue-500" step="0.01" onchange="updateTotals()">

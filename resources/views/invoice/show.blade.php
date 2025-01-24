@@ -19,7 +19,10 @@
         <div class="bg-white shadow-lg rounded-lg p-8 mt-6" id="print-section">
             <div class="text-left mb-8">
                 {{-- <img src="/path-to-your-logo.png" alt="Logo" class="mx-auto mb-4" style="max-width: 100px;"> --}}
-                <h1 class="text-2xl font-bold text-gray-800">Company name</h1>
+                <h1 class="text-2xl font-bold text-gray-800">Bhavani Traders</h1>
+                <p>All Kind of Building Materials are Available</p>
+                <p>Nr. Hariya College, Indira Marg Road, Jamnagar.</p>
+                <p>Mo. 97148 28216, 93755 26050</p>
             </div>
 
             <div class="grid grid-cols-2 gap-6 mb-6">
@@ -67,9 +70,9 @@
             <div class="text-right mb-8">
                 <p><strong>Sub Total:</strong> ₹{{ number_format($invoice->subtotal, 2) }}</p>
                 <p><strong>Freight:</strong> ₹{{ number_format($invoice->freight, 2) }}</p>
-                <p><strong>Total of product and freight:</strong> ₹{{ number_format($invoice->subtotal + $invoice->freight, 2) }}</p>
-                <p><strong>Credited amount:</strong> ₹{{ number_format($invoice->credit, 2) }}</p>
-                <p><strong>Remaining amount:</strong> ₹{{ number_format($invoice->subtotal + $invoice->freight - $invoice->credit, 2) }}</p>
+                {{-- <p><strong>Total of product and freight:</strong> ₹{{ number_format($invoice->subtotal + $invoice->freight, 2) }}</p>
+                <p><strong>Credited amount:</strong> ₹{{ number_format($invoice->credit, 2) }}</p> --}}
+                <p><strong>Total amount:</strong> ₹{{ number_format($invoice->subtotal + $invoice->freight - $invoice->credit, 2) }}</p>
             </div>
 
             <div class="text-center">
