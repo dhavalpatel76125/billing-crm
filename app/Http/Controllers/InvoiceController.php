@@ -222,7 +222,7 @@ class InvoiceController extends Controller
             ->where('id', $id)
             ->select('id', 'customer_id', 'invoice_number', 'date', 'subtotal', 'freight', 'credit', 'total', 'reference', 'vehicle_number')
             ->firstOrFail();
-
+        
         return view('invoice.show', compact('invoice'));
     }
 

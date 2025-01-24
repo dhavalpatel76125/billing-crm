@@ -48,6 +48,7 @@
                 <thead class="bg-gray-200">
                     <tr>
                         <th class="border px-4 py-2">#</th>
+                        <th class="border px-4 py-2">Item Name</th>
                         <th class="border px-4 py-2">Item Description</th>
                         <th class="border px-4 py-2">Qty</th>
                         <th class="border px-4 py-2">Unit Price</th>
@@ -58,6 +59,7 @@
                     @foreach ($invoice->invoiceItems as $index => $item)
                         <tr>
                             <td class="border px-4 py-2">{{ $index + 1 }}</td>
+                            <td class="border px-4 py-2">{{ $item->product->name }}</td>
                             <td class="border px-4 py-2">{{ $item->description }}</td>
                             <td class="border px-4 py-2">{{ $item->quantity }}</td>
                             <td class="border px-4 py-2">₹{{ number_format($item->unit_price, 2) }}</td>
