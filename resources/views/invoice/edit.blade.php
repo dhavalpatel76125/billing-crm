@@ -28,7 +28,7 @@
                 </div>
                 <div>
                     <label for="date" class="block text-gray-800 font-semibold mb-2">Date</label>
-                    <input type="date" id="date" name="date" value="{{ $invoice->date }}" class="w-full border border-gray-400 rounded-lg px-4 py-3 focus:ring-blue-500 focus:border-blue-500" required disabled>
+                    <input type="date" id="date" name="date" value="{{ $invoice->date }}" class="w-full border border-gray-400 rounded-lg px-4 py-3 focus:ring-blue-500 focus:border-blue-500" required >
                 </div>
                 <div>
                     <label for="reference" class="block text-gray-800 font-semibold mb-2">Reference (Optional)</label>
@@ -178,7 +178,7 @@ function addNewLine() {
         </td>
         <td class="px-6 py-3 border w-1/6 text-right">
             <span class="item-total">₹0.00</span>
-            <input type="hidden" name="total[]" value="0" step="0.01">
+            <input type="hidden" name="total[]" value="0">
         </td>
         <td class="px-6 py-3 border w-1/12 text-center">
             <button type="button" onclick="removeLine(this)" class="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600">Remove</button>
