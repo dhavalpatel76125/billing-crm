@@ -48,7 +48,7 @@
                                     </a>
                                     <!-- Edit Icon -->
                                     <a href="{{ route('invoices.edit', $invoice->id) }}"
-                                        class="text-blue-500 hover:text-blue-800">
+                                        class="text-blue-500 hover:text-blue-800" hidden>
                                         <i class="fas fa-edit mr-3"></i>
                                     </a>
 
@@ -58,7 +58,7 @@
                                         onsubmit="return confirm('Are you sure you want to delete this invoice?');">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="text-red-500 hover:text-red-800">
+                                        <button type="submit" class="text-red-500 hover:text-red-800" hidden>
                                             <i class="fas fa-trash mr-3"></i>
                                         </button>
                                     </form>
