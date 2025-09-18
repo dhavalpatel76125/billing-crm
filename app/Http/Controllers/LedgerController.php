@@ -6,14 +6,14 @@ use App\Models\Invoice;
 use App\Models\BalanceSheet;
 use Illuminate\Http\Request;
 
-class LadgerController extends Controller
+class LedgerController extends Controller
 {
     // Index method
     public function index()
     {
         $customers = Customer::all();
 
-        return view('ladger.index', compact('customers'));
+        return view('ledger.index', compact('customers'));
     }
 
 }

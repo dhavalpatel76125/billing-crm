@@ -75,16 +75,16 @@
                 </div>
             </div>
         </div>
-        <!-- Ladger -->
-        <a href="{{ route('ladger.index') }}">
+        <!-- Ledger -->
+        <a href="{{ route('ledger.index') }}">
             <div class="bg-white shadow-md rounded-lg p-6 hover:shadow-lg transition-shadow duration-300">
                 <div class="flex items-center">
                     <div class="bg-yellow-500 text-white rounded-full p-3">
                         <i class="fas fa-wallet"></i>
                     </div>
                     <div class="ml-4">
-                        <h2 class="text-lg font-bold text-gray-700">Ladger</h2>
-                        <p class="text-sm text-gray-500">See your customer ladger</p>
+                        <h2 class="text-lg font-bold text-gray-700">Ledger</h2>
+                        <p class="text-sm text-gray-500">See your customer ledger</p>
                     </div>
                 </div>
                 <div class="mt-4 text-right">

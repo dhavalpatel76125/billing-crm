@@ -57,9 +57,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/show/{id}', 'App\Http\Controllers\ProductController@show')->name('show');
     });
 
-    // Ladger routes
-    Route::prefix('ladger')->name('ladger.')->group(function () {
-        Route::get('/', 'App\Http\Controllers\LadgerController@index')->name('index');
+    // Ledger routes
+    Route::prefix('ledger')->name('ledger.')->group(function () {
+        Route::get('/', 'App\Http\Controllers\LedgerController@index')->name('index');
     });
 
 

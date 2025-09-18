@@ -19,7 +19,7 @@
             <i class="fas fa-user mr-3"></i>
             Customer
         </a>
-        <a href="{{ route('customers.balance_sheet') }}" class="flex items-center {{ request()->routeIs('customers.balance_sheet') ? 'active-nav-link' : '' }} text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+        <a href="{{ route('customers.balance_sheet') }}" class="flex items-center {{ request()->routeIs('customers.balance_sheet') ? 'active-nav-link' : '' }} text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item" style="display: none">
             <i class="fas fa-balance-scale mr-3"></i>
             Balance Sheet
         </a>
