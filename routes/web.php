@@ -62,6 +62,11 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/', 'App\Http\Controllers\LedgerController@index')->name('index');
     });
 
+// customer ledger routes
+// /customers/ledger/data/${customerId}
+
+    Route::get('/customers/ledger/data/{customerId}', [CustomerController::class, 'getLedgerData'])
+        ->name('customers.ledger.data');
 
     // Balance sheet routes
     Route::put('/balance-sheet/{id}/update-credit', [BalanceSheetController::class, 'updateCredit'])

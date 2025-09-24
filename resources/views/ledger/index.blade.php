@@ -30,14 +30,14 @@ document.addEventListener("DOMContentLoaded", () => {
             placeholderValue: "Search for a customer..."
         });
 
-        const dropdown = document.querySelector("#customerdropdown2");
+        const dropdown = document.querySelector("#customerdropdown3");
 
         dropdown.addEventListener("change", async (event) => {
             const customerId = event.target.value;
             console.log("Selected Customer ID:", customerId);
 
             try {
-                const res = await fetch(`/customers/data/${customerId}`);
+                const res = await fetch(`/customers/ledger/data/${customerId}`);
 
                 const data = await res.json(); // controller returns JSON with HTML inside
                 console.log("Customer Data:", data);

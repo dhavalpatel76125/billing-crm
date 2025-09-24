@@ -9,6 +9,9 @@ use App\Models\Product;
 use App\Models\BalanceSheet;
 use App\Models\InvoiceNumber;
 use Illuminate\Http\Request;
+use App\Models\LedgerEntry;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Schema;
 
 class InvoiceController extends Controller
 {
@@ -102,6 +105,64 @@ class InvoiceController extends Controller
                 'total' => $request->unit_price[$index] * $request->quantity[$index],
             ]);
         }
+
+        // === LEDGER: insert entries into ledger_entries (place this BEFORE updateBalanceSheet) ===
+
+
+        $customerId = $invoice->customer_id;
+        $entryAt = $request->date ? Carbon::parse($request->date) : Carbon::now();
+
+        // 1) Debit row for the invoice (customer owes)
+        $debit = new LedgerEntry();
+        $debit->customer_id = $customerId;
+        $debit->invoice_id  = $invoice->id;
+        $debit->side        = 'debit';
+        $debit->amount      = round($totalDebit, 2);
+        $debit->allocated   = 1; // invoice debit considered allocated
+        $debit->remarks     = 'Invoice #' . ($invoice->invoice_number ?? $invoice->id);
+        $debit->entry_at    = $entryAt;
+        $debit->save();
+
+        // 2) If customer paid some amount at invoice creation, allocate to this invoice (up to invoice amount)
+        // NOTE: Do NOT create unapplied leftover here — that is handled by separate payment flow
+        $creditReceived = round(floatval($credit ?? 0), 2);
+        if ($creditReceived > 0 && $invoice->id) {
+            // allocate only up to invoice amount (do not create unapplied leftover)
+            $paidSoFar = LedgerEntry::where('invoice_id', $invoice->id)
+                ->where('side', 'credit')
+                ->sum('amount');
+
+            $invoiceOutstanding = max(0, floatval($totalDebit) - floatval($paidSoFar));
+            $toAlloc = min($creditReceived, $invoiceOutstanding);
+
+            if ($toAlloc > 0) {
+                $creditRow = new LedgerEntry();
+                $creditRow->customer_id = $customerId;
+                $creditRow->invoice_id  = $invoice->id;
+                $creditRow->side        = 'credit';
+                $creditRow->amount      = round($toAlloc, 2);
+                $creditRow->allocated   = 1;
+                $creditRow->remarks     = 'Payment at invoice creation';
+                $creditRow->entry_at    = $entryAt;
+                $creditRow->save();
+
+                // Optional: update invoice paid_amount/status if columns exist
+                if (Schema::hasColumn('invoices', 'paid_amount')) {
+                    $invoice->paid_amount = ($invoice->paid_amount ?? 0) + $toAlloc;
+                    if (Schema::hasColumn('invoices', 'grand_total') && floatval($invoice->paid_amount) >= floatval($invoice->grand_total)) {
+                        if (Schema::hasColumn('invoices', 'status')) {
+                            $invoice->status = 'paid';
+                        }
+                    }
+                    $invoice->save();
+                }
+            }
+
+            // any remaining creditReceived beyond $toAlloc is NOT handled here;
+            // record it later via your payment flow (recordPayment), which will create proper ledger rows.
+        }
+
+
 
         // Update balance sheet
         $this->updateBalanceSheet($request->customer, $totalDebit, $credit);
@@ -224,7 +285,7 @@ class InvoiceController extends Controller
             ->where('id', $id)
             ->select('id', 'customer_id', 'invoice_number', 'date', 'subtotal', 'freight', 'credit', 'total', 'reference', 'vehicle_number', 'grand_total')
             ->firstOrFail();
-        
+
         return view('invoice.show', compact('invoice'));
     }
 

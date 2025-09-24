@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BalanceSheet;
+use App\Models\LedgerEntry;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -33,6 +34,14 @@ class BalanceSheetController extends Controller
 
         // Save the updated record
         $balanceSheet->save();
+        // need to update in ledger as well
+
+        $ledgerEntry = new LedgerEntry();
+        $ledgerEntry->customer_id = $balanceSheet->customer_id;
+        $ledgerEntry->side = 'credit';
+        $ledgerEntry->amount = $newCreditAmount;
+        $ledgerEntry->entry_at = now();
+        $ledgerEntry->save();
 
         // Redirect back with a success message
         return redirect()->back()->with('success', 'Credit updated successfully!');

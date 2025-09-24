@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use App\Models\Invoice;
 use App\Models\BalanceSheet;
+use App\Models\LedgerEntry;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -99,5 +100,16 @@ class CustomerController extends Controller
 
         // Pass the data to the view
         return view('customers.balance_sheet', compact('balanceSheets'));
+    }
+
+
+    //getLedgerData
+    public function getLedgerData($customerId)
+    {
+        
+        $ledgerentries = LedgerEntry::where('customer_id', $customerId)
+            ->orderBy('entry_at', 'desc')
+            ->get();
+        return response()->json($ledgerentries);
     }
 }
