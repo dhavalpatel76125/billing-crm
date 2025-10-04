@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
@@ -106,10 +107,23 @@ class CustomerController extends Controller
     //getLedgerData
     public function getLedgerData($customerId)
     {
-        
-        $ledgerentries = LedgerEntry::where('customer_id', $customerId)
-            ->orderBy('entry_at', 'desc')
+        // 1) fetch ledger entries in chronological order (oldest first)
+        $entries = LedgerEntry::where('customer_id', $customerId)
+            ->orderBy('entry_at', 'asc')
+            ->orderBy('id', 'asc')
             ->get();
-        return response()->json($ledgerentries);
+
+        // 2) compute running balance
+        $running = 0.0;
+        foreach ($entries as $e) {
+            $running += ($e->side === 'credit') ? floatval($e->amount) : -floatval($e->amount);
+            $e->running_balance = number_format($running, 2, '.', '');
+        }
+
+        // 3) render partial view to HTML
+        $html = view('partials.customer_ledger_table', ['entries' => $entries])->render();
+        
+        // 4) return JSON payload with html
+        return response()->json(['html' => $html]);
     }
 }

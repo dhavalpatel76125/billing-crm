@@ -15,7 +15,7 @@ Route::post('logout', [LogoutController::class, 'logout'])->name('logout');
 
 // Protected routes (with middleware)
 Route::middleware(['auth'])->group(function () {
-    
+
     // Dashboard route via controller
     Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index')->name('dashboard');
 
@@ -62,9 +62,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/', 'App\Http\Controllers\LedgerController@index')->name('index');
     });
 
-// customer ledger routes
-// /customers/ledger/data/${customerId}
-
+    // customer ledger routes
+    // /customers/ledger/data/${customerId}
     Route::get('/customers/ledger/data/{customerId}', [CustomerController::class, 'getLedgerData'])
         ->name('customers.ledger.data');
 

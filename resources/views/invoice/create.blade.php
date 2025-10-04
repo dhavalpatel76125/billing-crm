@@ -133,10 +133,10 @@
             <textarea name="description[]" class="w-full px-4 py-3 border border-gray-400 rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="Description"></textarea>
         </td>
         <td class="px-6 py-3 border w-1/6">
-            <input type="number" name="quantity[]" class="w-full px-4 py-3 border border-gray-400 rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="0" step="0.01" onchange="updateTotals()">
+            <input type="number" name="quantity[]" class="w-full px-4 py-3 border border-gray-400 rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="0" step="0.01"  min="1" onchange="updateTotals()">
         </td>
 <td class="px-6 py-3 border w-1/6">
-    <input type="number" name="unit_price[]" class="w-full px-4 py-3 border border-gray-400 rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="0" step="0.01" onchange="updateTotals()">
+    <input type="number" name="unit_price[]" class="w-full px-4 py-3 border border-gray-400 rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="0" step="0.01" min="1" onchange="updateTotals()">
 </td>
 
         <td class="px-6 py-3 border w-1/6 text-right">
