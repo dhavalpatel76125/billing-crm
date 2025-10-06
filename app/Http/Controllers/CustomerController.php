@@ -120,6 +120,10 @@ class CustomerController extends Controller
             $e->running_balance = number_format($running, 2, '.', '');
         }
 
+        if($entries->isEmpty()) {
+            // If no entries, return a message
+            return response()->json(['html' => '<p>No ledger entries found for this customer.</p>']);
+        }
         // 3) render partial view to HTML
         $html = view('partials.customer_ledger_table', ['entries' => $entries])->render();
         
