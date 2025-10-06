@@ -40,6 +40,7 @@ class BalanceSheetController extends Controller
         $ledgerEntry->customer_id = $balanceSheet->customer_id;
         $ledgerEntry->side = 'credit';
         $ledgerEntry->amount = $newCreditAmount;
+        $ledgerEntry->remarks = $request->remarks ?? 'Credit added at ' . now()->toDateTimeString();
         $ledgerEntry->entry_at = now();
         $ledgerEntry->save();
 
